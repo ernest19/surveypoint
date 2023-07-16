@@ -21,6 +21,17 @@
             margin: 0;
         }
         </style>
+
+        <style>
+            table {
+              border-collapse: collapse;
+            }
+
+            th, td {
+              border: 1px solid black;
+              padding: 8px;
+            }
+            </style>
         <title></title>
     </head>
     <body>
@@ -100,7 +111,7 @@
                 },
                 mouseover: highlightFeature,
             });
-            var popupContent = '<table>\
+            var popupContent = '<table >\
                     <tr>\
                         <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
                     </tr>\
