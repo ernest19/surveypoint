@@ -20,7 +20,7 @@
             padding: 0;
             margin: 0;
         }
-       
+
             table {
               border-collapse: collapse;
             }
@@ -110,9 +110,6 @@
                 mouseover: highlightFeature,
             });
             var popupContent = '<table >\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
                     <tr>\
                         <th scope="row">label</th>\
                         <td>' + (feature.properties['label'] !== null ? autolinker.link(feature.properties['label'].toLocaleString()) : '') + '</td>\
