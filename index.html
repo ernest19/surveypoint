@@ -8,7 +8,10 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
         <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         html, body, #map {
@@ -32,9 +35,11 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
         <script src="js/leaflet-search.js"></script>
-        <script src="data/GREATERACCRACOORDINATES_2.js"></script>
+        <script src="data/GREATERACCRACOORDINATES_1.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -73,23 +78,10 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        map.createPane('pane_OSMStandard_0');
-        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
-        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            pane: 'pane_OSMStandard_0',
-            opacity: 1.0,
-            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
-            minZoom: 1,
-            maxZoom: 28,
-            minNativeZoom: 0,
-            maxNativeZoom: 19
-        });
-        layer_OSMStandard_0;
-        map.addLayer(layer_OSMStandard_0);
-        map.createPane('pane_GoogleHybrid_1');
-        map.getPane('pane_GoogleHybrid_1').style.zIndex = 401;
-        var layer_GoogleHybrid_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-            pane: 'pane_GoogleHybrid_1',
+        map.createPane('pane_GoogleHybrid_0');
+        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
+        var layer_GoogleHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleHybrid_0',
             opacity: 1.0,
             attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
             minZoom: 1,
@@ -97,9 +89,9 @@
             minNativeZoom: 0,
             maxNativeZoom: 20
         });
-        layer_GoogleHybrid_1;
-        map.addLayer(layer_GoogleHybrid_1);
-        function pop_GREATERACCRACOORDINATES_2(feature, layer) {
+        layer_GoogleHybrid_0;
+        map.addLayer(layer_GoogleHybrid_0);
+        function pop_GREATERACCRACOORDINATES_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -113,43 +105,56 @@
                         <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['label'] !== null ? autolinker.link(feature.properties['label'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">label</th>\
+                        <td>' + (feature.properties['label'] !== null ? autolinker.link(feature.properties['label'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ngcfeet_north'] !== null ? autolinker.link(feature.properties['ngcfeet_north'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ngcfeet_north</th>\
+                        <td>' + (feature.properties['ngcfeet_north'] !== null ? autolinker.link(feature.properties['ngcfeet_north'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ngcfeet_east'] !== null ? autolinker.link(feature.properties['ngcfeet_east'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ngcfeet_east</th>\
+                        <td>' + (feature.properties['ngcfeet_east'] !== null ? autolinker.link(feature.properties['ngcfeet_east'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ngcmeters_north'] !== null ? autolinker.link(feature.properties['ngcmeters_north'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ngcmeters_north</th>\
+                        <td>' + (feature.properties['ngcmeters_north'] !== null ? autolinker.link(feature.properties['ngcmeters_north'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ngcmeters_east'] !== null ? autolinker.link(feature.properties['ngcmeters_east'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ngcmeters_east</th>\
+                        <td>' + (feature.properties['ngcmeters_east'] !== null ? autolinker.link(feature.properties['ngcmeters_east'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ngcgeographic_latitude'] !== null ? autolinker.link(feature.properties['ngcgeographic_latitude'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ngcgeographic_latitude</th>\
+                        <td>' + (feature.properties['ngcgeographic_latitude'] !== null ? autolinker.link(feature.properties['ngcgeographic_latitude'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ngcgeographic_longitude'] !== null ? autolinker.link(feature.properties['ngcgeographic_longitude'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ngcgeographic_longitude</th>\
+                        <td>' + (feature.properties['ngcgeographic_longitude'] !== null ? autolinker.link(feature.properties['ngcgeographic_longitude'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ngcwgs84_utmups_north'] !== null ? autolinker.link(feature.properties['ngcwgs84_utmups_north'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ngcwgs84_utmups_north</th>\
+                        <td>' + (feature.properties['ngcwgs84_utmups_north'] !== null ? autolinker.link(feature.properties['ngcwgs84_utmups_north'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ngcwgs84_utmups_east'] !== null ? autolinker.link(feature.properties['ngcwgs84_utmups_east'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ngcwgs84_utmups_east</th>\
+                        <td>' + (feature.properties['ngcwgs84_utmups_east'] !== null ? autolinker.link(feature.properties['ngcwgs84_utmups_east'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['locality'] !== null ? autolinker.link(feature.properties['locality'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">locality</th>\
+                        <td>' + (feature.properties['locality'] !== null ? autolinker.link(feature.properties['locality'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['landmarks'] !== null ? autolinker.link(feature.properties['landmarks'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">landmarks</th>\
+                        <td>' + (feature.properties['landmarks'] !== null ? autolinker.link(feature.properties['landmarks'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['districts'] !== null ? autolinker.link(feature.properties['districts'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">districts</th>\
+                        <td>' + (feature.properties['districts'] !== null ? autolinker.link(feature.properties['districts'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['pillar_type'] !== null ? autolinker.link(feature.properties['pillar_type'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">pillar_type</th>\
+                        <td>' + (feature.properties['pillar_type'] !== null ? autolinker.link(feature.properties['pillar_type'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['pillar_status'] !== null ? autolinker.link(feature.properties['pillar_status'].toLocaleString()) : '') + '</td>\
@@ -173,9 +178,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_GREATERACCRACOORDINATES_2_0() {
+        function style_GREATERACCRACOORDINATES_1_0() {
             return {
-                pane: 'pane_GREATERACCRACOORDINATES_2',
+                pane: 'pane_GREATERACCRACOORDINATES_1',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -189,31 +194,43 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_GREATERACCRACOORDINATES_2');
-        map.getPane('pane_GREATERACCRACOORDINATES_2').style.zIndex = 402;
-        map.getPane('pane_GREATERACCRACOORDINATES_2').style['mix-blend-mode'] = 'normal';
-        var layer_GREATERACCRACOORDINATES_2 = new L.geoJson(json_GREATERACCRACOORDINATES_2, {
+        map.createPane('pane_GREATERACCRACOORDINATES_1');
+        map.getPane('pane_GREATERACCRACOORDINATES_1').style.zIndex = 401;
+        map.getPane('pane_GREATERACCRACOORDINATES_1').style['mix-blend-mode'] = 'normal';
+        var layer_GREATERACCRACOORDINATES_1 = new L.geoJson(json_GREATERACCRACOORDINATES_1, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_GREATERACCRACOORDINATES_2',
-            layerName: 'layer_GREATERACCRACOORDINATES_2',
-            pane: 'pane_GREATERACCRACOORDINATES_2',
-            onEachFeature: pop_GREATERACCRACOORDINATES_2,
+            dataVar: 'json_GREATERACCRACOORDINATES_1',
+            layerName: 'layer_GREATERACCRACOORDINATES_1',
+            pane: 'pane_GREATERACCRACOORDINATES_1',
+            onEachFeature: pop_GREATERACCRACOORDINATES_1,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_GREATERACCRACOORDINATES_2_0(feature));
+                return L.circleMarker(latlng, style_GREATERACCRACOORDINATES_1_0(feature));
             },
         });
-        bounds_group.addLayer(layer_GREATERACCRACOORDINATES_2);
-        map.addLayer(layer_GREATERACCRACOORDINATES_2);
-        var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/GREATERACCRACOORDINATES_2.png" /> GREATERACCRACOORDINATES': layer_GREATERACCRACOORDINATES_2,"Google Hybrid": layer_GoogleHybrid_1,"OSM Standard": layer_OSMStandard_0,}).addTo(map);
+        var cluster_GREATERACCRACOORDINATES_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_GREATERACCRACOORDINATES_1.addLayer(layer_GREATERACCRACOORDINATES_1);
+
+        bounds_group.addLayer(layer_GREATERACCRACOORDINATES_1);
+        cluster_GREATERACCRACOORDINATES_1.addTo(map);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
         setBounds();
         map.addControl(new L.Control.Search({
-            layer: layer_GREATERACCRACOORDINATES_2,
+            layer: cluster_GREATERACCRACOORDINATES_1,
             initial: false,
             hideMarkerOnCollapse: true,
             propertyName: 'label'}));
