@@ -162,25 +162,7 @@
                         <th scope="row">pillar_type</th>\
                         <td>' + (feature.properties['pillar_type'] !== null ? autolinker.link(feature.properties['pillar_type'].toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['pillar_status'] !== null ? autolinker.link(feature.properties['pillar_status'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['sel_towncord_metrs_north'] !== null ? autolinker.link(feature.properties['sel_towncord_metrs_north'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['sel_towncord_metrs_east'] !== null ? autolinker.link(feature.properties['sel_towncord_metrs_east'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['dist_km'] !== null ? autolinker.link(feature.properties['dist_km'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['sel_dist'] !== null ? autolinker.link(feature.properties['sel_dist'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['field_20'] !== null ? autolinker.link(feature.properties['field_20'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
+                    </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
